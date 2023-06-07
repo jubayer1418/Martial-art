@@ -4,18 +4,48 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Google from "../Shared/Google";
 const SingUp = () => {
-  const { user, Register } = useContext(AuthContext);
+  const { user, Register, updateUserProfile } = useContext(AuthContext);
   const navigete = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = ({ email, password }) => {
-    Register(email, password).then((result) => {
-      console.log(result.user);
-      navigete("/");
-    });
+  const onSubmit = ({ email, password, img, name }) => {
+    const image = img[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_KEY
+    }`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        const imageUrl = imageData.data.display_url;
+
+        Register(email, password)
+          .then((result) => {
+            updateUserProfile(name, imageUrl)
+              .then(() => {})
+              .catch((err) => {
+                console.log(err.message);
+              });
+            console.log(result.user);
+
+            navigete("/");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="hero min-h-screen bg-base-200">
