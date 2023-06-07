@@ -1,7 +1,13 @@
+import BannerSlider from "./BannerSlider";
+import Classes from "./Classes";
+import Instructors from "./Instructors";
+
 const Home = () => {
   return (
     <div>
-      <h1>this is home</h1>
+      <BannerSlider></BannerSlider>
+      <Classes></Classes>
+      <Instructors></Instructors>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 const Google = () => {
-  const { user, handlegoogle } = useContext(AuthContext);
+  const { handlegoogle } = useContext(AuthContext);
   const navigete = useNavigate();
   const handlegooglelogin = () => {
     handlegoogle()
@@ -16,12 +16,11 @@ const Google = () => {
         const errorMessage = error.message;
         console.log(errorMessage);
       });
-    s;
   };
   return (
     <span
       onClick={handlegooglelogin}
-      className="bg-red-600 flex items-center justify-center cursor-pointer hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
+      className="bg-[#E0B573] hover:text-white hover:bg-[#ff9900] flex items-center justify-center cursor-pointer  text-[#110C04] font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline mt-5"
     >
       <FaGoogle></FaGoogle>
       <span className="ml-2">Sign in with Google</span>
