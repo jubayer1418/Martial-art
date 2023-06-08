@@ -101,7 +101,10 @@ const Navbar = () => {
                 </a>
               </li>
               <li>
-                <Link to={"/dashboard"}>Dashboard</Link>
+                {/* <Link  to={"/dashboard"}>Dashboard</Link> */}
+                <Link onClick={() => window.my_modal_3.showModal()}>
+                  Dashboard
+                </Link>
               </li>
               <li onClick={handleLogout}>
                 <a>Logout</a>
