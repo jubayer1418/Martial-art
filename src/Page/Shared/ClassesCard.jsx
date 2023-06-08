@@ -1,13 +1,6 @@
 const ClassesCard = ({ singleclass }) => {
-  const {
-    Available_Seats,
-    Class_Image,
-    Class_Name,
-    Instructor_Email,
-    Instructor_Name,
-    Price,
-    Status,
-  } = singleclass;
+  const { Available_Seats, Class_Image, Class_Name, Instructor_Name, Price } =
+    singleclass;
   return (
     <div className="card w-96 bg-base-100 shadow-xl mb-8 mx-auto group">
       <figure className="px-10 pt-10">

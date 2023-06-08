@@ -4,13 +4,15 @@ import Error404 from "../Page/404/error404";
 
 import Dashboard from "../Layout/Dashboard";
 import AddClasses from "../Page/Dashboard/AddClasses";
+import ManageClasses from "../Page/Dashboard/ManageClasses";
+import ManageUser from "../Page/Dashboard/ManageUser";
 import MyClasses from "../Page/Dashboard/MyClasses";
 import Classes from "../Page/Home/Classes";
 import Home from "../Page/Home/Home";
 import Instructors from "../Page/Home/Instructors";
 import Login from "../Page/Login/Login";
 import SingUp from "../Page/SingUp/SingUp";
-import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,11 +40,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-      <PrivateRoute>
-        <Dashboard></Dashboard>
-      </PrivateRoute>
-    ),
+    element: <Dashboard></Dashboard>,
     children: [
       {
         path: "addclasses",
@@ -51,6 +49,22 @@ const router = createBrowserRouter([
       {
         path: "myclasses",
         element: <MyClasses></MyClasses>,
+      },
+      {
+        path: "manageclasses",
+        element: (
+          <AdminRoute>
+            <ManageClasses></ManageClasses>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageusers",
+        element: (
+          <AdminRoute>
+            <ManageUser></ManageUser>
+          </AdminRoute>
+        ),
       },
     ],
   },

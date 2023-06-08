@@ -23,7 +23,19 @@ const Login = () => {
   const onSubmit = ({ email, password }) =>
     SingIn(email, password)
       .then((result) => {
-        result.user;
+        console.log(result.user.displayName);
+        const name = result.user.displayName;
+        const saveUser = { name, email };
+        fetch(`http://localhost:5000/users`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        }).catch((err) => {
+          setLoading(false);
+          console.log(err.message);
+        });
         navigete("/");
       })
       .catch((err) => {

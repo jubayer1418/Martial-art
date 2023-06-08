@@ -3,18 +3,12 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Google from "../Shared/Google";
-import Loder from "../Shared/Loder";
 const SingUp = () => {
   const [err, setErr] = useState("");
-  const { Register, updateUserProfile, setLoading, loading } =
-    useContext(AuthContext);
+  const { Register, updateUserProfile, setLoading } = useContext(AuthContext);
 
   const navigete = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = ({ email, password, img, name, confirm_password }) => {
     if (
@@ -50,29 +44,34 @@ const SingUp = () => {
         Register(email, password)
           .then((result) => {
             updateUserProfile(name, imageUrl)
-              .then(() => {})
+              .then(() => {
+                const saveUser = { name, email };
+                fetch(`http://localhost:5000/users`, {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(saveUser),
+                }).catch((err) => {
+                  setLoading(false);
+                  console.log(err.message);
+                });
+                console.log(result.user);
+
+                navigete("/");
+              })
               .catch((err) => {
                 setLoading(false);
-                console.log(err.message);
+                setErr(err.message);
               });
-            console.log(result.user);
-
-            navigete("/");
           })
           .catch((err) => {
             setLoading(false);
             setErr(err.message);
           });
-      })
-      .catch((err) => {
-        setLoading(false);
-        setErr(err.message);
       });
   };
-  console.log(errors);
-  if (loading) {
-    return <Loder />;
-  }
+
   return (
     <>
       <div className="hero min-h-screen bg-base-200 py-40">

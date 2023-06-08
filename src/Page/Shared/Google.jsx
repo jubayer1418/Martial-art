@@ -3,13 +3,25 @@ import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 const Google = () => {
-  const { handlegoogle } = useContext(AuthContext);
+  const { handlegoogle, setLoading } = useContext(AuthContext);
   const navigete = useNavigate();
   const handlegooglelogin = () => {
     handlegoogle()
       .then((result) => {
-        const user = result.user;
-        console.log(user);
+        const name = result.user.displayName;
+        const email = result.user.email;
+        const saveUser = { name, email };
+        fetch(`http://localhost:5000/users`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        }).catch((err) => {
+          setLoading(false);
+          console.log(err.message);
+        });
+
         navigete("/");
       })
       .catch((error) => {

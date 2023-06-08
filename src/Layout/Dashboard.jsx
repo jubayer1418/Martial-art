@@ -4,10 +4,14 @@ import { FaHome } from "react-icons/fa";
 import { MdIntegrationInstructions } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../Hook/useAdmin";
 
 const Dashboard = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isInstructor, setIsInstructor] = useState(true);
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
+
+  const [isInstructor, setIsInstructor] = useState(false);
+  const [isStudent, setIsStudent] = useState(false);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -25,46 +29,51 @@ const Dashboard = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
-              }
-              to="/classes"
-            >
-              My Classes
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
-              }
-              to="/classes"
-            >
-              My Enroled
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
-              }
-              to="/classes"
-            >
-              My Enroled Payment
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
-              }
-              to="/classes"
-            >
-              Payment history
-            </NavLink>
-          </li>
+          {isStudent && (
+            <>
+              {" "}
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
+                  }
+                  to="/classes"
+                >
+                  My Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
+                  }
+                  to="/classes"
+                >
+                  My Enroled
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
+                  }
+                  to="/classes"
+                >
+                  My Enroled Payment
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
+                  }
+                  to="/classes"
+                >
+                  Payment history
+                </NavLink>
+              </li>
+            </>
+          )}
           {isInstructor && (
             <>
               <li>
@@ -96,7 +105,7 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
                   }
-                  to="/classes"
+                  to="manageclasses"
                 >
                   Manage Classes
                 </NavLink>
@@ -106,9 +115,9 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
                   }
-                  to="/classes"
+                  to="manageusers"
                 >
-                  Manage Users+
+                  Manage Users
                 </NavLink>
               </li>
             </>
