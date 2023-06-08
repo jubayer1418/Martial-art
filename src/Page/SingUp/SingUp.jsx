@@ -1,18 +1,21 @@
-/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Google from "../Shared/Google";
+import Loder from "../Shared/Loder";
 const SingUp = () => {
   const [err, setErr] = useState("");
-  const { Register, updateUserProfile } = useContext(AuthContext);
+  const { Register, updateUserProfile, setLoading, loading } =
+    useContext(AuthContext);
+
   const navigete = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = ({ email, password, img, name, confirm_password }) => {
     if (
       !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
@@ -49,6 +52,7 @@ const SingUp = () => {
             updateUserProfile(name, imageUrl)
               .then(() => {})
               .catch((err) => {
+                setLoading(false);
                 console.log(err.message);
               });
             console.log(result.user);
@@ -56,18 +60,24 @@ const SingUp = () => {
             navigete("/");
           })
           .catch((err) => {
-            console.log(err);
+            setLoading(false);
+            setErr(err.message);
           });
       })
       .catch((err) => {
-        console.log(err);
+        setLoading(false);
+        setErr(err.message);
       });
   };
+  console.log(errors);
+  if (loading) {
+    return <Loder />;
+  }
   return (
     <>
       <div className="hero min-h-screen bg-base-200 py-40">
         {err && (
-          <h1 className="text-red-600 absolute text-xl  w-72 top-44">{err} </h1>
+          <h1 className="text-red-600 absolute text-xl  w-72 top-14">{err} </h1>
         )}
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">

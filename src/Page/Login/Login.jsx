@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -8,15 +9,17 @@ import Google from "../Shared/Google";
 const Login = () => {
   const emailRef = useRef();
   const [err, setErr] = useState("");
+  console.log(err);
   const navigete = useNavigate();
   const [showpass, setShowpass] = useState("password");
-  const { SingIn, resetPassword } = useContext(AuthContext);
+  const { SingIn, setLoading, resetPassword } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
 
     formState: { errors },
   } = useForm();
+
   const onSubmit = ({ email, password }) =>
     SingIn(email, password)
       .then((result) => {
@@ -24,12 +27,14 @@ const Login = () => {
         navigete("/");
       })
       .catch((err) => {
-        setErr(err.message);
+        setLoading(false);
+        toast.error(err.message);
       });
   const handleReset = (email) => {
     resetPassword(email)
       .then(() => {})
       .catch((err) => {
+        setLoading(false);
         setErr(err.message);
       });
   };
@@ -37,7 +42,7 @@ const Login = () => {
     <>
       <div className="hero min-h-[600px] bg-base-200">
         {err && (
-          <h1 className="text-red-600 absolute text-2xl  top-44">{err} </h1>
+          <h1 className="text-red-600 absolute text-2xl  top-0">{err} </h1>
         )}
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">

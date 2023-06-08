@@ -11,19 +11,24 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { app } from "../Firebase/firebase.config";
+import Loder from "../Page/Shared/Loder";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
-  const [loading, setLoding] = useState(true);
+  const [loading, setLoading] = useState(true);
+
   const Register = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const SingIn = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
   const updateUserProfile = (name, photo) => {
@@ -33,16 +38,17 @@ const AuthProvider = ({ children }) => {
     });
   };
   const handlegoogle = () => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
   const resetPassword = (email) => {
-    setLoding(true);
+    setLoading(true);
     return sendPasswordResetEmail(auth, email);
   };
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (curUser) => {
       setUser(curUser);
-      setLoding(false);
+      setLoading(false);
       console.log("auth", curUser);
     });
     return () => {
@@ -50,11 +56,14 @@ const AuthProvider = ({ children }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  if (loading) {
+    return <Loder />;
+  }
   const authInfo = {
     user,
     setUser,
     loading,
-    setLoding,
+    setLoading,
     handlegoogle,
     logOut,
     SingIn,
