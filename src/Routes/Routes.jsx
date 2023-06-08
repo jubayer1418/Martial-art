@@ -3,6 +3,8 @@ import Main from "../Layout/Main";
 import Error404 from "../Page/404/error404";
 
 import Dashboard from "../Layout/Dashboard";
+import AddClasses from "../Page/Dashboard/AddClasses";
+import MyClasses from "../Page/Dashboard/MyClasses";
 import Classes from "../Page/Home/Classes";
 import Home from "../Page/Home/Home";
 import Instructors from "../Page/Home/Instructors";
@@ -41,6 +43,16 @@ const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
+    children: [
+      {
+        path: "addclasses",
+        element: <AddClasses></AddClasses>,
+      },
+      {
+        path: "myclasses",
+        element: <MyClasses></MyClasses>,
+      },
+    ],
   },
   {
     path: "/singup",
