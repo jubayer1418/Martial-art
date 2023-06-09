@@ -27,7 +27,10 @@ const Class = ({ myclass, index, refetch }) => {
           <td>{Price}</td>
           <td>{Available_Seats}</td>
           <td>
-            <button className="btn bg-[#E0B573]  text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]">
+            <button
+              onClick={() => window.my_modal_3.showModal()}
+              className="btn bg-[#E0B573]  text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]"
+            >
               enroll
             </button>
           </td>

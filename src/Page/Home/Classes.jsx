@@ -6,7 +6,7 @@ const Classes = () => {
   const [classes, setClasses] = useState([]);
   console.log(classes);
   useEffect(() => {
-    fetch("http://localhost:5000/addclass", {
+    fetch(`${import.meta.env.VITE_SERVER_LINK}/addclass`, {
       method: "GET",
     })
       .then((res) => res.json())

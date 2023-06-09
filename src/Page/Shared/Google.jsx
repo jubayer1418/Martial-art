@@ -13,7 +13,7 @@ const Google = () => {
         const email = result.user.email;
         const role = "student";
         const saveUser = { name, email, role };
-        fetch(`http://localhost:5000/users`, {
+        fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

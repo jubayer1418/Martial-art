@@ -5,7 +5,7 @@ const AddClasses = () => {
 
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/addclass", {
+    fetch(`${import.meta.env.VITE_SERVER_LINK}/addclass`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
