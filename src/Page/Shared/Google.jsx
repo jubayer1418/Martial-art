@@ -9,8 +9,10 @@ const Google = () => {
     handlegoogle()
       .then((result) => {
         const name = result.user.displayName;
+        console.log(name);
         const email = result.user.email;
-        const saveUser = { name, email };
+        const role = "student";
+        const saveUser = { name, email, role };
         fetch(`http://localhost:5000/users`, {
           method: "POST",
           headers: {

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import { useState } from "react";
 import { FaHome } from "react-icons/fa";
 import { MdIntegrationInstructions } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
@@ -10,8 +8,6 @@ const Dashboard = () => {
   const [isAdmin] = useAdmin();
   console.log(isAdmin);
 
-  const [isInstructor, setIsInstructor] = useState(false);
-  const [isStudent, setIsStudent] = useState(false);
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -29,15 +25,14 @@ const Dashboard = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
-          {isStudent && (
+          {isAdmin?.role == "student" && (
             <>
-              {" "}
               <li>
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
                   }
-                  to="/classes"
+                  to="mysectionclass"
                 >
                   My Classes
                 </NavLink>
@@ -47,34 +42,25 @@ const Dashboard = () => {
                   className={({ isActive }) =>
                     isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
                   }
-                  to="/classes"
+                  to="endrol"
                 >
                   My Enroled
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
                   }
-                  to="/classes"
-                >
-                  My Enroled Payment
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
-                  }
-                  to="/classes"
+                  to="myhistory"
                 >
                   Payment history
                 </NavLink>
               </li>
             </>
           )}
-          {isInstructor && (
+          {isAdmin?.role == "instructor" && (
             <>
               <li>
                 <NavLink
@@ -98,7 +84,7 @@ const Dashboard = () => {
               </li>
             </>
           )}
-          {isAdmin && (
+          {isAdmin?.role == "admin" && (
             <>
               <li>
                 <NavLink

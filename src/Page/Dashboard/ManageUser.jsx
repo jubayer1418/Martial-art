@@ -6,7 +6,7 @@ import ManageUsersTable from "./ManageUsersTable";
 const ManageUser = () => {
   const { loading } = useAuth();
   const [axiosSecure] = useAxiosSecure();
-  const { data: users } = useQuery({
+  const { data: users, refetch } = useQuery({
     queryKey: ["users"],
     enabled: !loading,
     queryFn: async () => {
@@ -17,11 +17,12 @@ const ManageUser = () => {
   });
   return (
     <div className="w-[90%]">
-      {users.map((user, index) => (
+      {users?.map((user, index) => (
         <ManageUsersTable
           key={user._id}
           index={index}
           user={user}
+          refetch={refetch}
         ></ManageUsersTable>
       ))}
     </div>

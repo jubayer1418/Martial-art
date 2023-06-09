@@ -25,7 +25,8 @@ const Login = () => {
       .then((result) => {
         console.log(result.user.displayName);
         const name = result.user.displayName;
-        const saveUser = { name, email };
+        const role = "student";
+        const saveUser = { name, email, role };
         fetch(`http://localhost:5000/users`, {
           method: "POST",
           headers: {

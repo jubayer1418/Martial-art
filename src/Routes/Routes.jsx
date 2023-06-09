@@ -7,6 +7,10 @@ import AddClasses from "../Page/Dashboard/AddClasses";
 import ManageClasses from "../Page/Dashboard/ManageClasses";
 import ManageUser from "../Page/Dashboard/ManageUser";
 import MyClasses from "../Page/Dashboard/MyClasses";
+import UpdateClass from "../Page/Dashboard/UpdateClass";
+import MyAddClasses from "../Page/Dashboard/studentboard/MyAddClasses";
+import MyEndrol from "../Page/Dashboard/studentboard/MyEndrol";
+import PaymentHistory from "../Page/Dashboard/studentboard/PaymentHistory";
 import Classes from "../Page/Home/Classes";
 import Home from "../Page/Home/Home";
 import Instructors from "../Page/Home/Instructors";
@@ -43,8 +47,24 @@ const router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
       {
+        path: "mysectionclass",
+        element: <MyAddClasses></MyAddClasses>,
+      },
+      {
+        path: "endrol",
+        element: <MyEndrol></MyEndrol>,
+      },
+      {
+        path: "myhistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
         path: "addclasses",
         element: <AddClasses></AddClasses>,
+      },
+      {
+        path: "myclasses/updateclass/:id",
+        element: <UpdateClass></UpdateClass>,
       },
       {
         path: "myclasses",

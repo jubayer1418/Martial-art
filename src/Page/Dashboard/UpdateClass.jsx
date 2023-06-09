@@ -1,20 +1,21 @@
 import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import useAdmin from "../../Hook/useAdmin";
-const AddClasses = () => {
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+const UpdateClass = () => {
+  const [axiosSecure] = useAxiosSecure();
+  const navigate = useNavigate();
   const [isAdmin] = useAdmin();
-
+  const params = useParams();
+  console.log(params);
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/addclass", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    axiosSecure
+      .put(`addclass/${params.id}`, data)
       .then((res) => {
         console.log(res);
         reset();
+        navigate("/dashboard/myclasses");
       })
       .catch((err) => {
         console.log(err);
@@ -105,7 +106,7 @@ const AddClasses = () => {
           </div>
           <div className="form-control   text-center">
             <button className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]">
-              Add classes
+              update class
             </button>
           </div>
         </form>
@@ -113,4 +114,4 @@ const AddClasses = () => {
     </div>
   );
 };
-export default AddClasses;
+export default UpdateClass;

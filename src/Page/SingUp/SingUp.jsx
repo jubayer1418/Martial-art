@@ -45,7 +45,8 @@ const SingUp = () => {
           .then((result) => {
             updateUserProfile(name, imageUrl)
               .then(() => {
-                const saveUser = { name, email };
+                const role = "student";
+                const saveUser = { name, email, role };
                 fetch(`http://localhost:5000/users`, {
                   method: "POST",
                   headers: {

@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import useAuth from "../../Hook/useAuth";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 import MyClassesTable from "./MyClassesTable";
 
 const MyClasses = () => {
-  const [classes, setClasses] = useState([]);
-  console.log(classes);
-  useEffect(() => {
-    fetch("http://localhost:5000/addclass", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => setClasses(data))
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const { loading } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+  const { data: classes } = useQuery({
+    queryKey: ["users"],
+    enabled: !loading,
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/addclass`);
+      console.log(res.data);
+      return res.data;
+    },
+  });
   return (
     <div>
-      <h1>my classes {classes?.length}</h1>
-      {classes.map((singleclass) => (
+      {classes?.map((singleclass) => (
         <MyClassesTable
           key={singleclass._id}
           singleclass={singleclass}

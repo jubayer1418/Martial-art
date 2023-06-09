@@ -1,5 +1,15 @@
-const ManageUsersTable = ({ user, index }) => {
-  const { name, email } = user;
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+const ManageUsersTable = ({ user, index, refetch }) => {
+  const [axiosSecure] = useAxiosSecure();
+  const { name, email, _id, role } = user;
+  const handleInstructor = (id) => {
+    axiosSecure
+      .patch(`/users/admin/${id}?role=instructor`)
+      .then(() => refetch());
+  };
+  const handleAdmin = (id) => {
+    axiosSecure.patch(`/users/admin/${id}?role=admin`).then(() => refetch());
+  };
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -20,13 +30,27 @@ const ManageUsersTable = ({ user, index }) => {
             <td className="w-1/3">{name}</td>
             <td className="w-1/3">{email}</td>
             <td>
-              <button className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]">
-                Deny
+              <button
+                onClick={() => handleInstructor(_id)}
+                className={`${
+                  role === "instructor"
+                    ? " btn-disabled btn"
+                    : "btn bg-[#E0B573]  text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]"
+                } `}
+              >
+                Make Instructor
               </button>
             </td>
             <td>
-              <button className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]">
-                Deny
+              <button
+                onClick={() => handleAdmin(_id)}
+                className={`${
+                  role === "admin"
+                    ? " btn-disabled btn"
+                    : "btn bg-[#E0B573]  text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]"
+                } `}
+              >
+                Make Admin
               </button>
             </td>
           </tr>
