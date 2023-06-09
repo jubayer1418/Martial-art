@@ -1,6 +1,24 @@
+import useAdmin from "../../Hook/useAdmin";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+
 const ClassesCard = ({ singleclass }) => {
+  const [isAdmin] = useAdmin();
+  const [axiosSecure] = useAxiosSecure();
   const { Available_Seats, Class_Image, Class_Name, Instructor_Name, Price } =
     singleclass;
+  const handleSelectClass = (email) => {
+    axiosSecure
+      .post(`/selectedclass`, {
+        Available_Seats,
+        Class_Image,
+        Class_Name,
+        Instructor_Name,
+        Price,
+        email,
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="card w-96 bg-base-100 shadow-xl mb-8 mx-auto group">
       <figure className="px-10 pt-10">
@@ -18,7 +36,10 @@ const ClassesCard = ({ singleclass }) => {
           <p>Price: $ {Price}</p>
         </div>
         <div className="card-actions">
-          <button className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]">
+          <button
+            onClick={() => handleSelectClass(isAdmin?.email)}
+            className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]"
+          >
             Add to class
           </button>
         </div>
