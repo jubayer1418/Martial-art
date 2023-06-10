@@ -8,6 +8,7 @@ import ManageClasses from "../Page/Dashboard/ManageClasses";
 import ManageUser from "../Page/Dashboard/ManageUser";
 import MyClasses from "../Page/Dashboard/MyClasses";
 import UpdateClass from "../Page/Dashboard/UpdateClass";
+import Welcome from "../Page/Dashboard/Welcome";
 import MyAddClasses from "../Page/Dashboard/studentboard/MyAddClasses";
 import MyEndrol from "../Page/Dashboard/studentboard/MyEndrol";
 import PaymentHistory from "../Page/Dashboard/studentboard/PaymentHistory";
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "myclasses",
         element: <MyClasses></MyClasses>,
+      },
+      {
+        path: "welcome",
+        element: <Welcome></Welcome>,
       },
       {
         path: "manageclasses",

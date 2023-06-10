@@ -1,6 +1,6 @@
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
-const Class = ({ myclass, index, refetch }) => {
+const Class = ({ myclass, index, refetch, handleClass }) => {
   const [axiosSecure] = useAxiosSecure();
   const { Available_Seats, Class_Name, Instructor_Name, Price, _id } = myclass;
   const handleDelete = (id) => {
@@ -27,12 +27,13 @@ const Class = ({ myclass, index, refetch }) => {
           <td>{Price}</td>
           <td>{Available_Seats}</td>
           <td>
-            <button
-              onClick={() => window.my_modal_3.showModal()}
+            <label
+              onClick={() => handleClass(myclass)}
+              htmlFor="my_modal_6"
               className="btn bg-[#E0B573]  text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]"
             >
               enroll
-            </button>
+            </label>
           </td>
           <td>
             <button

@@ -37,10 +37,10 @@ const MyClassesTable = ({ singleclass }) => {
         <tbody>
           {/* row 1 */}
           <tr>
-            <td className="text-xl font-semibold">{Class_Name}</td>
+            <td className="text-xl w-full font-semibold ">{Class_Name}</td>
 
-            <td>{Available_Seats}</td>
-            <td>{Price}</td>
+            <th>{Available_Seats}</th>
+            <th>{Price}</th>
             <td className="badge badge-accent mt-6">{Status}</td>
 
             <th

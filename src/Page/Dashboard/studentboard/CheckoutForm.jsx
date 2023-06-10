@@ -4,21 +4,26 @@ import useAuth from "../../../Hook/useAuth";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import "./Checkout.css";
 // import { CardElement, useElements, useStripe } from "../../src";
-const CheckoutForm = () => {
+const CheckoutForm = ({ enrollClass }) => {
   const { user } = useAuth();
   const stripe = useStripe();
   const elements = useElements();
-  const axiosSecure = useAxiosSecure();
+  const [axiosSecure] = useAxiosSecure();
   const [clientSecret, setClientSecret] = useState("");
+  // console.log(enrollClass?.Price);
   const [cardError, setCardError] = useState("");
   useEffect(() => {
     // if (bookingInfo?.price) {
-    axiosSecure.post("/create-payment-intent", { price: 800 }).then((res) => {
-      console.log(res.data.clientSecret);
-      setClientSecret(res.data.clientSecret);
-    });
+    if (enrollClass?.Price) {
+      axiosSecure
+        .post("create-payment-intent", { price: enrollClass?.Price })
+        .then((res) => {
+          console.log(res.data.clienSecret);
+          setClientSecret(res.data.clienSecret);
+        });
+    }
     // }
-  }, [axiosSecure]);
+  }, [axiosSecure, enrollClass?.Price]);
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
@@ -45,7 +50,7 @@ const CheckoutForm = () => {
     });
 
     if (error) {
-      setCardError("[error]", error);
+      setCardError(error);
     } else {
       console.log("[PaymentMethod]", paymentMethod);
     }
@@ -65,16 +70,18 @@ const CheckoutForm = () => {
       console.log("[paymentIntent]", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         const paymentInfo = {
-          ...booking,
           transactionId: paymentIntent.id,
           date: new Date(),
+          cheack: 2023,
         };
-        axiosSecure.post("/payments", paymentInfo).then((res) => {
-          console.log(res.data);
-          if (res.data.result.insertedId) {
-            // display confirm
-          }
-        });
+        axiosSecure
+          .patch(`/selectedclass/${enrollClass?._id}`, { ...paymentInfo })
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.insertedId) {
+              //
+            }
+          });
       }
     }
   };

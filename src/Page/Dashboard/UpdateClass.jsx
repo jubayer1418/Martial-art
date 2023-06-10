@@ -1,28 +1,50 @@
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import useAdmin from "../../Hook/useAdmin";
+import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 const UpdateClass = () => {
-  const [axiosSecure] = useAxiosSecure();
   const navigate = useNavigate();
-  const [isAdmin] = useAdmin();
   const params = useParams();
-  console.log(params);
+  const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
+
   const onSubmit = (data) => {
-    axiosSecure
-      .put(`addclass/${params.id}`, data)
-      .then((res) => {
-        console.log(res);
-        reset();
-        navigate("/dashboard/myclasses");
-      })
-      .catch((err) => {
-        console.log(err);
+    const image = data.Class_Image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_KEY
+    }`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        data.Class_Image = imageData.data.display_url;
+        axiosSecure
+          .put(`addclass/${params.id}`, data)
+          .then((res) => {
+            console.log(res);
+            reset();
+            toast.success("Successfully update");
+            navigate("/dashboard/myclasses");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
   };
+
   return (
     <div className="hero min-h-screen bg-base-200">
+      <h1 className="absolute top-48 text-2xl text-red-600">
+        all input full fill
+      </h1>
       <div className="hero-content">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -46,7 +68,7 @@ const UpdateClass = () => {
               </label>
               <input
                 {...register("Class_Image", { required: true })}
-                type="url"
+                type="file"
                 placeholder="Class Image"
                 className="input input-bordered"
               />
@@ -58,7 +80,7 @@ const UpdateClass = () => {
               <input
                 {...register("Instructor_Name", { required: true })}
                 type="text"
-                value={isAdmin?.name}
+                value={user?.displayName}
                 placeholder="Instructor name"
                 className="input input-bordered"
               />
@@ -70,7 +92,7 @@ const UpdateClass = () => {
               <input
                 {...register("Instructor_Email", { required: true })}
                 type="text"
-                value={isAdmin?.email}
+                value={user?.email}
                 placeholder="Instructor email"
                 className="input input-bordered"
               />
@@ -93,7 +115,7 @@ const UpdateClass = () => {
               <input
                 {...register("Price", { required: true })}
                 type="number"
-                placeholder="Price"
+                placeholder="$ Price"
                 className="input input-bordered"
               />
               <input

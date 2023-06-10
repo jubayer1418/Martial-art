@@ -49,7 +49,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubcribe = onAuthStateChanged(auth, (curUser) => {
       setUser(curUser);
-      setLoading(false);
+
       console.log("auth", curUser);
       // get and set token
       if (curUser) {
@@ -60,16 +60,15 @@ const AuthProvider = ({ children }) => {
           .then((data) => {
             // console.log(data.data.token)
             localStorage.setItem("access-token", data?.data?.token);
-            setLoading(false);
           });
       } else {
         localStorage.removeItem("access-token");
       }
+      setLoading(false);
     });
     return () => {
       unsubcribe();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (loading) {
     return <Loder />;

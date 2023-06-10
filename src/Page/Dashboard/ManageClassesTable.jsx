@@ -1,6 +1,5 @@
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 const ManageClassesTable = ({ singleclass, index, refetch }) => {
-  console.log(index);
   const {
     Available_Seats,
     Class_Image,

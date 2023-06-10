@@ -7,10 +7,10 @@ const ManageClasses = () => {
   const { loading } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const { data: classes, refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["alladdclasses"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/addclass`);
+      const res = await axiosSecure.get(`/alladdclasses`);
       console.log(res.data);
       return res.data;
     },

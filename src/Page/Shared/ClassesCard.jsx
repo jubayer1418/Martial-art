@@ -1,12 +1,13 @@
-import useAdmin from "../../Hook/useAdmin";
+import { toast } from "react-hot-toast";
+import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const ClassesCard = ({ singleclass }) => {
-  const [isAdmin] = useAdmin();
+  const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const { Available_Seats, Class_Image, Class_Name, Instructor_Name, Price } =
     singleclass;
-  const handleSelectClass = (email) => {
+  const handleSelectClass = (email, id) => {
     axiosSecure
       .post(`/selectedclass`, {
         Available_Seats,
@@ -15,8 +16,11 @@ const ClassesCard = ({ singleclass }) => {
         Instructor_Name,
         Price,
         email,
+        id,
       })
-      .then(() => {})
+      .then(() => {
+        toast.success("Successfully selected class");
+      })
       .catch((err) => console.log(err));
   };
   return (
@@ -37,7 +41,7 @@ const ClassesCard = ({ singleclass }) => {
         </div>
         <div className="card-actions">
           <button
-            onClick={() => handleSelectClass(isAdmin?.email)}
+            onClick={() => handleSelectClass(user?.email)}
             className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]"
           >
             Add to class

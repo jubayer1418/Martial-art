@@ -1,24 +1,57 @@
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import useAdmin from "../../Hook/useAdmin";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 const AddClasses = () => {
+  const navigate = useNavigate();
   const [isAdmin] = useAdmin();
-
+  const [axiosSecure] = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
-    fetch(`${import.meta.env.VITE_SERVER_LINK}/addclass`, {
+    const image = data.Class_Image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_KEY
+    }`;
+
+    fetch(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
+      body: formData,
     })
-      .then((res) => {
-        console.log(res);
-        reset();
-      })
-      .catch((err) => {
-        console.log(err);
+      .then((res) => res.json())
+      .then((imageData) => {
+        data.Class_Image = imageData.data.display_url;
+        axiosSecure
+          .post("/addclass", { ...data })
+          .then((res) => {
+            console.log(res);
+            toast.success("Successfully add class");
+            reset();
+            navigate("/dashboard/myclasses");
+          })
+          .catch((err) => {
+            console.log(err);
+            toast.error(err);
+          });
       });
+
+    // fetch(`${import.meta.env.VITE_SERVER_LINK}/addclass`, {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(instrctor),
+    // })
+    //   .then((res) => {
+    //     console.log(res);
+    //     reset();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -45,7 +78,7 @@ const AddClasses = () => {
               </label>
               <input
                 {...register("Class_Image", { required: true })}
-                type="url"
+                type="file"
                 placeholder="Class Image"
                 className="input input-bordered"
               />
@@ -92,7 +125,7 @@ const AddClasses = () => {
               <input
                 {...register("Price", { required: true })}
                 type="number"
-                placeholder="Price"
+                placeholder="$ Price"
                 className="input input-bordered"
               />
               <input

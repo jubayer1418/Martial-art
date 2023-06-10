@@ -6,7 +6,6 @@ import useAdmin from "../Hook/useAdmin";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
-  console.log(isAdmin);
 
   return (
     <div className="drawer lg:drawer-open">

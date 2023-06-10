@@ -4,17 +4,20 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 import MyClassesTable from "./MyClassesTable";
 
 const MyClasses = () => {
+  const { user } = useAuth();
+
   const { loading } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const { data: classes } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["addclass", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/addclass`);
+      const res = await axiosSecure.get(`/addclass?email=${user?.email}`);
       console.log(res.data);
-      return res.data;
+      return res?.data;
     },
   });
+
   return (
     <div>
       {classes?.map((singleclass) => (

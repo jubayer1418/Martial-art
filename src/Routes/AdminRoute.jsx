@@ -10,7 +10,7 @@ const AdminRoute = ({ children }) => {
   if (loading || isAdminLoading) {
     return <Loder></Loder>;
   }
-  if (user && isAdmin) {
+  if (user && isAdmin.role == "admin") {
     return children;
   }
   return <Navigate to={"/"} state={{ from: location }} replace></Navigate>;

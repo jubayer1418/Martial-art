@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import img from "../../assets/Brown Abstract The Lion Free Logo.png";
 const Navbar = () => {
+  // const [isAdmin] = useAdmin();
   const { user, logOut } = useContext(AuthContext);
   const handleLogout = () => {
     logOut()
@@ -101,7 +102,16 @@ const Navbar = () => {
                 </a>
               </li>
               <li>
-                <Link to={"/dashboard"}>Dashboard</Link>
+                {/* {isAdmin?.role == "student" && (
+                  <Link to={"/dashboard/mysectionclass"}>Dashboard</Link>
+                )}
+                {isAdmin?.role == "instructor" && (
+                  <Link to={"/dashboard/addclasses"}>Dashboard</Link>
+                )}
+                {isAdmin?.role == "admin" && (
+                  <Link to={"/dashboard/manageclasses"}>Dashboard</Link>
+                )} */}
+                <Link to={"/dashboard/welcome"}>Dashboard</Link>
               </li>
               <li onClick={handleLogout}>
                 <a>Logout</a>
