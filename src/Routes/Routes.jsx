@@ -12,11 +12,11 @@ import Welcome from "../Page/Dashboard/Welcome";
 import MyAddClasses from "../Page/Dashboard/studentboard/MyAddClasses";
 import MyEndrol from "../Page/Dashboard/studentboard/MyEndrol";
 import PaymentHistory from "../Page/Dashboard/studentboard/PaymentHistory";
-import Classes from "../Page/Home/Classes";
 import Home from "../Page/Home/Home";
-import Instructors from "../Page/Home/Instructors";
 import Login from "../Page/Login/Login";
 import SingUp from "../Page/SingUp/SingUp";
+import AllClass from "../Page/allclass/AllClass";
+import Allinstructors from "../Page/allinstructor/Allinstructors";
 import AdminRoute from "./AdminRoute";
 const router = createBrowserRouter([
   {
@@ -31,11 +31,11 @@ const router = createBrowserRouter([
 
       {
         path: "/classes",
-        element: <Classes></Classes>,
+        element: <AllClass></AllClass>,
       },
       {
         path: "/instructors",
-        element: <Instructors></Instructors>,
+        element: <Allinstructors></Allinstructors>,
       },
     ],
   },

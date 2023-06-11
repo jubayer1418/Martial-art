@@ -24,19 +24,34 @@ const MyAddClasses = () => {
   const handleClass = (enroll) => {
     setenrollClass(enroll);
   };
-  // console.log(data);
+  console.log(data);
   return (
     <>
       <div className="overflow-x-auto">
-        {data?.map((myclass, index) => (
-          <Class
-            key={myclass._id}
-            myclass={myclass}
-            index={index}
-            refetch={refetch}
-            handleClass={handleClass}
-          ></Class>
-        ))}
+        <table className="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>--------Class_Name-----------</th>
+              <th>-------------Instructor_Name---------------</th>
+              <th>Price</th>
+              <th>Available_Seats</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.map((myclass, index) => (
+              <Class
+                key={myclass._id}
+                myclass={myclass}
+                index={index}
+                refetch={refetch}
+                handleClass={handleClass}
+              ></Class>
+            ))}
+          </tbody>
+        </table>
       </div>
       <input type="checkbox" id="my_modal_6" className="modal-toggle" />
       <div className="modal">

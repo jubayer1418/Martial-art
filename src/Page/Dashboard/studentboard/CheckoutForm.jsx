@@ -8,9 +8,10 @@ import "./Checkout.css";
 // import { CardElement, useElements, useStripe } from "../../src";
 const CheckoutForm = ({ enrollClass, refetch }) => {
   const { user } = useAuth();
+
   const navigate = useNavigate();
   // const seat = parseFloat(enrollClass.Available_Seats);
-  // console.log(seat);
+  console.log(enrollClass);
   const stripe = useStripe();
   const elements = useElements();
   const [axiosSecure] = useAxiosSecure();
@@ -80,6 +81,8 @@ const CheckoutForm = ({ enrollClass, refetch }) => {
           date: new Date(),
         };
         const seat = parseFloat(enrollClass.Available_Seats);
+        const totalSeat = parseFloat(enrollClass.total_seat);
+        const data = { seat, totalSeat };
         axiosSecure.post("/payments", { ...paymentInfo }).then((res) => {
           console.log(res.data);
           if (res.data.insertResult.insertedId) {
@@ -88,8 +91,13 @@ const CheckoutForm = ({ enrollClass, refetch }) => {
             refetch();
             axiosSecure
               .patch(`/addclass/availableseat/${enrollClass?.id}`, {
-                seat,
+                ...data,
               })
+              .then((res) => {
+                console.log(res.data);
+              });
+            axiosSecure
+              .patch(`/users?email=${enrollClass?.Instructor_Email}`)
               .then((res) => {
                 console.log(res.data);
                 if (res.data.acknowledged) {

@@ -37,6 +37,16 @@ const MyEndrol = () => {
               <td>{endrolclass.Instructor_Name}</td>
               <td>{endrolclass.Price}</td>
               <td>{endrolclass.transactionId}</td>
+              <td>
+                {" "}
+                <button
+                  className={
+                    "btn bg-[#E0B573]  text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]"
+                  }
+                >
+                  you are enroll
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

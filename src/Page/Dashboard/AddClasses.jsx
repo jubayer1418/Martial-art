@@ -25,7 +25,7 @@ const AddClasses = () => {
       .then((imageData) => {
         data.Class_Image = imageData.data.display_url;
         axiosSecure
-          .post("/addclass", { ...data })
+          .post("/addclass", { ...data, total_seat: data.Available_Seats })
           .then((res) => {
             console.log(res);
             toast.success("Successfully add class");
@@ -137,9 +137,11 @@ const AddClasses = () => {
             </div>
           </div>
           <div className="form-control   text-center">
-            <button className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]">
-              Add classes
-            </button>
+            <input
+              type="submit"
+              value={" Add classes"}
+              className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]"
+            />
           </div>
         </form>
       </div>

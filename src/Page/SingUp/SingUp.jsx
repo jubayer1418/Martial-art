@@ -45,6 +45,8 @@ const SingUp = () => {
           .then((result) => {
             updateUserProfile(name, imageUrl)
               .then(() => {
+                navigete("/");
+                setLoading(false);
                 const role = "student";
                 const img = result.user.photoURL;
                 const saveUser = { name, email, role, img };
@@ -54,13 +56,13 @@ const SingUp = () => {
                     "content-type": "application/json",
                   },
                   body: JSON.stringify(saveUser),
-                }).catch((err) => {
-                  setLoading(false);
-                  console.log(err.message);
-                });
+                })
+                  .then(() => {})
+                  .catch((err) => {
+                    setLoading(false);
+                    console.log(err.message);
+                  });
                 console.log(result.user);
-
-                navigete("/");
               })
               .catch((err) => {
                 setLoading(false);

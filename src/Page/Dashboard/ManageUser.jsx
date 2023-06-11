@@ -10,21 +10,38 @@ const ManageUser = () => {
     queryKey: ["users"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users`);
+      const res = await axiosSecure.get(`/useramin`);
       console.log(res.data);
       return res.data;
     },
   });
   return (
-    <div className="w-[90%]">
-      {users?.map((user, index) => (
-        <ManageUsersTable
-          key={user._id}
-          index={index}
-          user={user}
-          refetch={refetch}
-        ></ManageUsersTable>
-      ))}
+    <div className="w-[80%]">
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* row 1 */}
+            {users?.map((user, index) => (
+              <ManageUsersTable
+                key={user._id}
+                index={index}
+                user={user}
+                refetch={refetch}
+              ></ManageUsersTable>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

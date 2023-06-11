@@ -4,14 +4,14 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 import ClassesCard from "../Shared/ClassesCard";
 import SectionTitle from "../Shared/SectionTitle";
 
-const Classes = () => {
+const AllClass = () => {
   const [axiosSecure] = useAxiosSecure();
   const { loading } = useAuth();
   const { data: classes } = useQuery({
     queryKey: ["addclasses"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/addclasses`);
+      const res = await axiosSecure.get(`/allclasses`);
 
       return res?.data;
     },
@@ -29,7 +29,7 @@ const Classes = () => {
   return (
     <div className="my-10">
       <SectionTitle title={"Popular Classes"}></SectionTitle>
-      <div className="grid grid-cols-3 w-[70%] mx-auto mt-10">
+      <div className="grid grid-cols-3 w-[70%] mx-auto ">
         {classes?.map((singleclass) => (
           <ClassesCard
             key={singleclass._id}
@@ -41,4 +41,4 @@ const Classes = () => {
   );
 };
 
-export default Classes;
+export default AllClass;

@@ -1,17 +1,17 @@
 import { useQuery } from "react-query";
 import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
+import InstructorCard from "../Home/InstructorCard";
 import SectionTitle from "../Shared/SectionTitle";
-import InstructorCard from "./InstructorCard";
 
-const Instructors = () => {
+const Allinstructors = () => {
   const { loading, user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const { data: users } = useQuery({
     queryKey: ["users"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users?role=instructor`);
+      const res = await axiosSecure.get(`/allusers?role=instructor`);
       console.log(res.data);
       return res.data;
     },
@@ -32,4 +32,4 @@ const Instructors = () => {
   );
 };
 
-export default Instructors;
+export default Allinstructors;

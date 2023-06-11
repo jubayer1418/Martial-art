@@ -36,8 +36,9 @@ const Login = () => {
           body: JSON.stringify(saveUser),
         }).catch((err) => {
           setLoading(false);
-          console.log(err.message);
+          toast.error(err.message);
         });
+
         navigete("/");
       })
       .catch((err) => {
