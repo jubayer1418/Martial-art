@@ -25,8 +25,9 @@ const Login = () => {
       .then((result) => {
         console.log(result.user.displayName);
         const name = result.user.displayName;
+        const img = result.user.photoURL;
         const role = "student";
-        const saveUser = { name, email, role };
+        const saveUser = { name, email, role, img };
         fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
           method: "POST",
           headers: {

@@ -46,7 +46,8 @@ const SingUp = () => {
             updateUserProfile(name, imageUrl)
               .then(() => {
                 const role = "student";
-                const saveUser = { name, email, role };
+                const img = result.user.photoURL;
+                const saveUser = { name, email, role, img };
                 fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
                   method: "POST",
                   headers: {

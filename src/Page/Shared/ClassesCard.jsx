@@ -5,8 +5,14 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 const ClassesCard = ({ singleclass }) => {
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
-  const { Available_Seats, Class_Image, Class_Name, Instructor_Name, Price } =
-    singleclass;
+  const {
+    Available_Seats,
+    Class_Image,
+    Class_Name,
+    Instructor_Name,
+    Price,
+    Instructor_Email,
+  } = singleclass;
   const handleSelectClass = (email, id) => {
     axiosSecure
       .post(`/selectedclass`, {
@@ -16,6 +22,7 @@ const ClassesCard = ({ singleclass }) => {
         Instructor_Name,
         Price,
         email,
+        Instructor_Email,
         id,
       })
       .then(() => {

@@ -12,7 +12,8 @@ const Google = () => {
         console.log(name);
         const email = result.user.email;
         const role = "student";
-        const saveUser = { name, email, role };
+        const img = result.user.photoURL;
+        const saveUser = { name, email, role, img };
         fetch(`${import.meta.env.VITE_SERVER_LINK}/users`, {
           method: "POST",
           headers: {
