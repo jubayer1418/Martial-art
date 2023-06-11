@@ -38,7 +38,7 @@ const ClassesCard = ({ singleclass }) => {
     <div
       className={`${
         Available_Seats == 0
-          ? " shadow-red-600 card group bg-red-500 bg-opacity-60 shadow-2xl w-96  mb-8 "
+          ? " shadow-red-600 card group bg-red-500 mx-auto bg-opacity-60 shadow-2xl w-96  mb-8 "
           : "card w-96 bg-base-100 shadow-xl mb-8 mx-auto group"
       }`}
     >

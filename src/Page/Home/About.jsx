@@ -3,11 +3,11 @@ import img from "../../assets/abu.jpg";
 const About = () => {
   return (
     <>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen bg-base-200 ">
         <div className="hero-content flex-col lg:flex-row gap-10">
           {/* <SectionTitle title={"About"}></SectionTitle> */}
-          <img src={img} className="max-w-3xl rounded-lg shadow-2xl" />
-          <div>
+          <img src={img} className="md:max-w-3xl rounded-lg shadow-2xl" />
+          <div className="overflow-hidden">
             <h1 className="text-5xl font-bold">
               ABOUT <span className="text-[#E43D4E]">FIGHT</span> SCHOOL
             </h1>

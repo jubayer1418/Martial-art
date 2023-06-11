@@ -16,15 +16,15 @@ const BannerSlider = () => {
       <Swiper
         navigation={true}
         modules={[Navigation]}
-        className="mySwiper h-[800px]"
+        className="mySwiper h-[80%]"
       >
         <SwiperSlide className="relative">
           <img className="object-cover w-full " src={img3} alt="" />
-          <div className=" absolute top-0 w-full opacity-60 py-40  bg-[#110C04] h-full space-y-16 px-20 ">
-            <h1 className="w-1/3 text-5xl text-white font-semibold">
+          <div className=" absolute top-0 w-full opacity-60 lg:py-40  bg-[#110C04] h-full space-y-16 md:px-20 ">
+            <h1 className="lg:w-1/3 lg:text-5xl text-white font-semibold">
               WELCOME TO KARATE AND MARTIAL ARTS SCHOOL
             </h1>
-            <p className="text-2xl w-1/3 text-white font-semibold">
+            <p className="text-2xl lg:w-1/3  text-white font-semibold">
               Karate is martial art and way of life that trains a practitioner
               to be peaceful.
             </p>

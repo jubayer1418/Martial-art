@@ -1,6 +1,6 @@
 const InstructorCard = ({ singleUser }) => {
   return (
-    <div className="card w-96 glass overflow-hidden relative transition duration-200 transform hover:-translate-y-4 rounded shadow-lg hover:shadow-2xl m-auto h-96">
+    <div className="card mx-auto w-96 glass overflow-hidden relative transition duration-200 transform hover:-translate-y-4 rounded shadow-lg hover:shadow-2xl m-auto h-96">
       <figure>
         <img src={singleUser?.img} alt="Movie" />
       </figure>

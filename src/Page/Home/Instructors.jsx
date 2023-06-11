@@ -19,7 +19,7 @@ const Instructors = () => {
   return (
     <>
       <SectionTitle title={"Popular Instructors"}></SectionTitle>
-      <div className="grid lg:grid-cols-4 grid-cols-3 gap-10 mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10 ">
         {users?.map((singleUser) => (
           <InstructorCard
             user={user}
