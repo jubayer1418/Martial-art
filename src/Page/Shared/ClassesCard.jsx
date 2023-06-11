@@ -12,6 +12,7 @@ const ClassesCard = ({ singleclass }) => {
     Instructor_Name,
     Price,
     Instructor_Email,
+    _id,
   } = singleclass;
   const handleSelectClass = (email, id) => {
     axiosSecure
@@ -48,7 +49,7 @@ const ClassesCard = ({ singleclass }) => {
         </div>
         <div className="card-actions">
           <button
-            onClick={() => handleSelectClass(user?.email)}
+            onClick={() => handleSelectClass(user?.email, _id)}
             className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]"
           >
             Add to class

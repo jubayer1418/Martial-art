@@ -42,10 +42,13 @@ const MyAddClasses = () => {
       <div className="modal">
         <div className="modal-box">
           <Elements stripe={stripePromise}>
-            <CheckoutForm enrollClass={enrollClass} />
+            <CheckoutForm enrollClass={enrollClass} refetch={refetch} />
           </Elements>
           <div className="modal-action">
-            <label htmlFor="my_modal_6" className="btn">
+            <label
+              htmlFor="my_modal_6"
+              className="btn absolute top-16 mt-8 bg-[#E0B573]   text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]"
+            >
               Close!
             </label>
           </div>

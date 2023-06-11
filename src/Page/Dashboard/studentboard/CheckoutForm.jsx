@@ -1,11 +1,16 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../../Hook/useAuth";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import "./Checkout.css";
 // import { CardElement, useElements, useStripe } from "../../src";
-const CheckoutForm = ({ enrollClass }) => {
+const CheckoutForm = ({ enrollClass, refetch }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
+  // const seat = parseFloat(enrollClass.Available_Seats);
+  // console.log(seat);
   const stripe = useStripe();
   const elements = useElements();
   const [axiosSecure] = useAxiosSecure();
@@ -70,18 +75,29 @@ const CheckoutForm = ({ enrollClass }) => {
       console.log("[paymentIntent]", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         const paymentInfo = {
+          ...enrollClass,
           transactionId: paymentIntent.id,
           date: new Date(),
-          cheack: 2023,
         };
-        axiosSecure
-          .patch(`/selectedclass/${enrollClass?._id}`, { ...paymentInfo })
-          .then((res) => {
-            console.log(res.data);
-            if (res.data.insertedId) {
-              //
-            }
-          });
+        const seat = parseFloat(enrollClass.Available_Seats);
+        axiosSecure.post("/payments", { ...paymentInfo }).then((res) => {
+          console.log(res.data);
+          if (res.data.insertResult.insertedId) {
+            //
+            toast.success("Successfully payment");
+            refetch();
+            axiosSecure
+              .patch(`/addclass/availableseat/${enrollClass?.id}`, {
+                seat,
+              })
+              .then((res) => {
+                console.log(res.data);
+                if (res.data.acknowledged) {
+                  navigate("/dashboard/endrol");
+                }
+              });
+          }
+        });
       }
     }
   };
@@ -106,13 +122,15 @@ const CheckoutForm = ({ enrollClass }) => {
           }}
         />
 
-        <button
-          type="submit"
-          disabled={!stripe}
-          className="btn bg-[#E0B573]  text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]"
-        >
-          pay
-        </button>
+        <div className="text-center">
+          <button
+            type="submit"
+            disabled={!stripe}
+            className="btn bg-[#E0B573]   text-[#110C04] hover:text-white disabled hover:bg-[#ff9900]"
+          >
+            pay ${enrollClass?.Price}
+          </button>
+        </div>
       </form>
       {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
     </>

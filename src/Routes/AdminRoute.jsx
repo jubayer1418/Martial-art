@@ -10,10 +10,16 @@ const AdminRoute = ({ children }) => {
   if (loading || isAdminLoading) {
     return <Loder></Loder>;
   }
-  if (user && isAdmin.role == "admin") {
+  if (user && isAdmin?.role == "admin") {
     return children;
   }
-  return <Navigate to={"/"} state={{ from: location }} replace></Navigate>;
+  return (
+    <Navigate
+      to={"/dashboard/welcome"}
+      state={{ from: location }}
+      replace
+    ></Navigate>
+  );
 };
 
 export default AdminRoute;
