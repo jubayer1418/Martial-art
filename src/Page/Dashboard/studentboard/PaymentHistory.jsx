@@ -5,16 +5,16 @@ import useAxiosSecure from "../../../Hook/useAxiosSecure";
 const PaymentHistory = () => {
   const [axiosSecure] = useAxiosSecure();
   const { loading } = useAuth();
-  const { data: endrol } = useQuery({
+  const { data: endrols } = useQuery({
     queryKey: ["endrolclasses"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/endrolclasses`);
+      const res = await axiosSecure.get(`/payments`);
 
       return res?.data;
     },
   });
-  console.log(endrol);
+  console.log(endrols);
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -30,7 +30,7 @@ const PaymentHistory = () => {
         </thead>
         <tbody>
           {/* row 1 */}
-          {endrol?.map((endrolclass, index) => (
+          {endrols?.map((endrolclass, index) => (
             <tr key={endrolclass._id}>
               <th>{index + 1}</th>
               <td>{endrolclass.Class_Name}</td>

@@ -49,27 +49,51 @@ const router = createBrowserRouter([
     children: [
       {
         path: "mysectionclass",
-        element: <MyAddClasses></MyAddClasses>,
+        element: (
+          <AdminRoute>
+            <MyAddClasses></MyAddClasses>
+          </AdminRoute>
+        ),
       },
       {
         path: "endrol",
-        element: <MyEndrol></MyEndrol>,
+        element: (
+          <AdminRoute>
+            <MyEndrol></MyEndrol>
+          </AdminRoute>
+        ),
       },
       {
         path: "myhistory",
-        element: <PaymentHistory></PaymentHistory>,
+        element: (
+          <AdminRoute>
+            <PaymentHistory></PaymentHistory>
+          </AdminRoute>
+        ),
       },
       {
         path: "addclasses",
-        element: <AddClasses></AddClasses>,
+        element: (
+          <AdminRoute>
+            <AddClasses></AddClasses>
+          </AdminRoute>
+        ),
       },
       {
         path: "myclasses/updateclass/:id",
-        element: <UpdateClass></UpdateClass>,
+        element: (
+          <AdminRoute>
+            <UpdateClass></UpdateClass>
+          </AdminRoute>
+        ),
       },
       {
         path: "myclasses",
-        element: <MyClasses></MyClasses>,
+        element: (
+          <AdminRoute>
+            <MyClasses></MyClasses>
+          </AdminRoute>
+        ),
       },
       {
         path: "welcome",

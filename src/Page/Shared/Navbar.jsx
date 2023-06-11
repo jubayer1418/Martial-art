@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import img from "../../assets/Brown Abstract The Lion Free Logo.png";
 const Navbar = () => {
+  // const [isAdmin] = useAdmin("hi");
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -58,6 +59,18 @@ const Navbar = () => {
           Classes
         </NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "text-[#E0B573]" : "hover:text-[#E0B573]"
+            }
+            to="/dashboard/welcome"
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
     </>
   );
   return (
@@ -90,7 +103,7 @@ const Navbar = () => {
         <Link to={"/"} className=" flex items-center">
           <img className="h-20 rounded-full" src={img} alt="" />
           <h1 className="font-bold max-md:hidden text-[#E0B573]  text-3xl pl-2">
-            The Lion Martial Art
+            The Martial Art
           </h1>
         </Link>
       </div>

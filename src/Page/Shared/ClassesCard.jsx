@@ -1,4 +1,5 @@
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 
@@ -48,12 +49,21 @@ const ClassesCard = ({ singleclass }) => {
           <p>Price: $ {Price}</p>
         </div>
         <div className="card-actions">
-          <button
-            onClick={() => handleSelectClass(user?.email, _id)}
-            className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]"
-          >
-            Add to class
-          </button>
+          {user ? (
+            <button
+              onClick={() => handleSelectClass(user?.email, _id)}
+              className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]"
+            >
+              Add to class
+            </button>
+          ) : (
+            <Link
+              to={"/login"}
+              className="btn bg-[#E0B573] text-[#110C04] hover:text-white hover:bg-[#ff9900]"
+            >
+              Add to class
+            </Link>
+          )}
         </div>
       </div>
     </div>

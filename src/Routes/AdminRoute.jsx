@@ -10,7 +10,11 @@ const AdminRoute = ({ children }) => {
   if (loading || isAdminLoading) {
     return <Loder></Loder>;
   }
-  if (user && isAdmin?.role == "admin") {
+  if (
+    (user && isAdmin?.role == "admin") ||
+    isAdmin?.role == "student" ||
+    isAdmin?.role == "instructor"
+  ) {
     return children;
   }
   return (
