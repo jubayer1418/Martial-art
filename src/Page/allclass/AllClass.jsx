@@ -29,7 +29,7 @@ const AllClass = () => {
   return (
     <div className="my-10">
       <SectionTitle title={"Popular Classes"}></SectionTitle>
-      <div className="grid grid-cols-3 w-[70%] mx-auto ">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto ">
         {classes?.map((singleclass) => (
           <ClassesCard
             key={singleclass._id}
