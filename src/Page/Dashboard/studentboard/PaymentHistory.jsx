@@ -4,12 +4,12 @@ import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 const PaymentHistory = () => {
   const [axiosSecure] = useAxiosSecure();
-  const { loading } = useAuth();
+  const { loading, user } = useAuth();
   const { data: endrols } = useQuery({
     queryKey: ["endrolclasses"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/payments`);
+      const res = await axiosSecure.get(`/payments?email=${user.email}`);
 
       return res?.data;
     },

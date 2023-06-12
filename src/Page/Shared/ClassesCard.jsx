@@ -7,7 +7,6 @@ const ClassesCard = ({ singleclass }) => {
   const { user } = useAuth();
 
   const [axiosSecure] = useAxiosSecure();
-
   const {
     Available_Seats,
     Class_Image,
@@ -18,7 +17,6 @@ const ClassesCard = ({ singleclass }) => {
     _id,
     total_seat,
   } = singleclass;
-
   const handleSelectClass = (email, id) => {
     axiosSecure
       .post(`/selectedclass`, {
