@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import img from "../../assets/Brown Abstract The Lion Free Logo.png";
 const Navbar = () => {
-  // const [isAdmin] = useAdmin("hi");
+  // const [isCategory] = useAdmin("hi");
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -20,7 +20,7 @@ const Navbar = () => {
     // add custom data-theme attribute to html tag required to update theme using DaisyUI
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
-  // const [isAdmin] = useAdmin();
+  // const [isCategory] = useAdmin();
   const { user, logOut } = useContext(AuthContext);
   const handleLogout = () => {
     logOut()
@@ -131,13 +131,13 @@ const Navbar = () => {
                 </a>
               </li>
               <li>
-                {/* {isAdmin?.role == "student" && (
+                {/* {isCategory?.role == "student" && (
                   <Link to={"/dashboard/mysectionclass"}>Dashboard</Link>
                 )}
-                {isAdmin?.role == "instructor" && (
+                {isCategory?.role == "instructor" && (
                   <Link to={"/dashboard/addclasses"}>Dashboard</Link>
                 )}
-                {isAdmin?.role == "admin" && (
+                {isCategory?.role == "admin" && (
                   <Link to={"/dashboard/manageclasses"}>Dashboard</Link>
                 )} */}
                 <Link to={"/dashboard/welcome"}>Dashboard</Link>

@@ -34,7 +34,6 @@ const AllClass = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.9 }}
-      className="my-10"
     >
       <Helmet>
         <title>AllClass | The Martial Art</title>

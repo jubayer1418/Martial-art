@@ -1,19 +1,19 @@
 import { Navigate, useLocation } from "react-router-dom";
-import useAdmin from "../Hook/useAdmin";
 import useAuth from "../Hook/useAuth";
+import useAdmin from "../Hook/useCategory";
 import Loder from "../Page/Shared/Loder";
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  const [isAdmin, isAdminLoading] = useAdmin();
+  const [isCategory, isCategoryLoading] = useAdmin();
   const location = useLocation();
-  if (loading || isAdminLoading) {
+  if (loading || isCategoryLoading) {
     return <Loder></Loder>;
   }
   if (
-    (user && isAdmin?.role == "admin") ||
-    isAdmin?.role == "student" ||
-    isAdmin?.role == "instructor"
+    (user && isCategory?.role == "admin") ||
+    isCategory?.role == "student" ||
+    isCategory?.role == "instructor"
   ) {
     return children;
   }

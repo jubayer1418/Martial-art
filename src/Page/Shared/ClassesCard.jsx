@@ -5,7 +5,9 @@ import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const ClassesCard = ({ singleclass }) => {
   const { user } = useAuth();
+
   const [axiosSecure] = useAxiosSecure();
+
   const {
     Available_Seats,
     Class_Image,
@@ -16,6 +18,7 @@ const ClassesCard = ({ singleclass }) => {
     _id,
     total_seat,
   } = singleclass;
+
   const handleSelectClass = (email, id) => {
     axiosSecure
       .post(`/selectedclass`, {
@@ -38,8 +41,8 @@ const ClassesCard = ({ singleclass }) => {
     <div
       className={`${
         Available_Seats == 0
-          ? " shadow-red-600 card group bg-red-500 mx-auto bg-opacity-60 shadow-2xl w-96  mb-8 "
-          : "card w-96 bg-base-100 shadow-xl mb-8 mx-auto group"
+          ? " shadow-red-600 card group bg-red-300 mx-auto bg-opacity-60 shadow-2xl w-96  mb-8 "
+          : "card w-96 bg-base-100 shadow-[#E0B573] shadow-2xl mb-8 mx-auto group"
       }`}
     >
       <figure className="px-10 pt-10">

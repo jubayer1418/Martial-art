@@ -2,11 +2,11 @@ import { useQuery } from "react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 
-const useAdmin = () => {
+const useCategory = () => {
   const { user, loading } = useAuth();
   // console.log(user.email);
   const [axiosSecure] = useAxiosSecure();
-  const { data: isAdmin, isloading: isAdminLoading } = useQuery({
+  const { data: isCategory, isloading: isCategoryLoading } = useQuery({
     queryKey: ["users/admin", user?.email],
     enabled: !loading,
     queryFn: async () => {
@@ -15,8 +15,8 @@ const useAdmin = () => {
       return res?.data;
     },
   });
-  // console.log(isAdmin);
-  return [isAdmin, isAdminLoading];
+  // console.log(isCategory);
+  return [isCategory, isCategoryLoading];
 };
 
-export default useAdmin;
+export default useCategory;

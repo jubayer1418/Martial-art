@@ -2,10 +2,10 @@ import { FaHome } from "react-icons/fa";
 import { MdIntegrationInstructions } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
 import { NavLink, Outlet } from "react-router-dom";
-import useAdmin from "../Hook/useAdmin";
+import useAdmin from "../Hook/useCategory";
 
 const Dashboard = () => {
-  const [isAdmin] = useAdmin();
+  const [isCategory] = useAdmin();
 
   return (
     <div className="drawer lg:drawer-open">
@@ -24,7 +24,7 @@ const Dashboard = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
-          {isAdmin?.role == "student" && (
+          {isCategory?.role == "student" && (
             <>
               <li>
                 <NavLink
@@ -59,7 +59,7 @@ const Dashboard = () => {
               </li>
             </>
           )}
-          {isAdmin?.role == "instructor" && (
+          {isCategory?.role == "instructor" && (
             <>
               <li>
                 <NavLink
@@ -83,7 +83,7 @@ const Dashboard = () => {
               </li>
             </>
           )}
-          {isAdmin?.role == "admin" && (
+          {isCategory?.role == "admin" && (
             <>
               <li>
                 <NavLink

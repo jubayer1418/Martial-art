@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import useAdmin from "../../Hook/useAdmin";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
+import useAdmin from "../../Hook/useCategory";
 const AddClasses = () => {
   const navigate = useNavigate();
-  const [isAdmin] = useAdmin();
+  const [isCategory] = useAdmin();
   const [axiosSecure] = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = (data) => {
@@ -90,7 +90,7 @@ const AddClasses = () => {
               <input
                 {...register("Instructor_Name", { required: true })}
                 type="text"
-                value={isAdmin?.name}
+                value={isCategory?.name}
                 placeholder="Instructor name"
                 className="input input-bordered"
               />
@@ -102,7 +102,7 @@ const AddClasses = () => {
               <input
                 {...register("Instructor_Email", { required: true })}
                 type="text"
-                value={isAdmin?.email}
+                value={isCategory?.email}
                 placeholder="Instructor email"
                 className="input input-bordered"
               />
