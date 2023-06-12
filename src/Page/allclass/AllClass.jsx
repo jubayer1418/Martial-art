@@ -1,9 +1,10 @@
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import { useQuery } from "react-query";
 import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import ClassesCard from "../Shared/ClassesCard";
 import SectionTitle from "../Shared/SectionTitle";
-
 const AllClass = () => {
   const [axiosSecure] = useAxiosSecure();
   const { loading } = useAuth();
@@ -27,7 +28,17 @@ const AllClass = () => {
   //     });
   // }, []);
   return (
-    <div className="my-10">
+    <motion.div
+      initial={{ opacity: 1, scale: 0 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.9 }}
+      className="my-10"
+    >
+      <Helmet>
+        <title>AllClass | The Martial Art</title>
+      </Helmet>
       <SectionTitle title={"Popular Classes"}></SectionTitle>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 mx-auto ">
         {classes?.map((singleclass) => (
@@ -37,7 +48,7 @@ const AllClass = () => {
           ></ClassesCard>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

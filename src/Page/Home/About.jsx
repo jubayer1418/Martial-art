@@ -1,9 +1,15 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import img from "../../assets/abu.jpg";
 const About = () => {
   return (
     <>
-      <div className="hero min-h-screen bg-base-200 ">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="hero min-h-screen bg-base-200 "
+      >
         <div className="hero-content flex-col lg:flex-row gap-10">
           {/* <SectionTitle title={"About"}></SectionTitle> */}
           <img src={img} className="md:max-w-3xl rounded-lg shadow-2xl" />
@@ -30,7 +36,7 @@ const About = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

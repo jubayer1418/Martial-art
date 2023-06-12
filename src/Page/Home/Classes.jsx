@@ -3,7 +3,6 @@ import useAuth from "../../Hook/useAuth";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import ClassesCard from "../Shared/ClassesCard";
 import SectionTitle from "../Shared/SectionTitle";
-
 const Classes = () => {
   const [axiosSecure] = useAxiosSecure();
   const { loading } = useAuth();
